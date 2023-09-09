@@ -13,4 +13,13 @@ using namespace std;
 
 int Solution::knight(int A, int B, int C, int D, int E, int F)
 {
+    if(!(C<A && C>=0 && D<B && D>=0 && E>=0 && E< A && F>=0 && F<B)){
+        return -1;
+    }
+    vector<vb> vis(A, vb(B, false));
+    queue<vi> q;
+    q.push({C, D});
+    q.push(nullptr);
+    int dist = 0;
+    vis[C][D] = true;
 }
