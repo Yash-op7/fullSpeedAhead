@@ -79,13 +79,12 @@ vector<int> maxXorQueries(vector<int> &arr, vector<vector<int>> &queries)
     int j = 0;
     for (int i = 0; i < m; i++)
     {
-        while (arr[j] <= temp[i][0])
+        while (j arr[j] <= temp[i][0])
         {
             tr.insert(arr[j]);
             j++;
         }
-        int x = tr.maxXOR(temp[i][1]);
-        ans[temp[i][2]] = x;
+        ans[temp[i][2]] = tr.maxXOR(temp[i][1]);
     }
     return ans;
 }
