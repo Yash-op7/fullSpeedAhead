@@ -11,3 +11,5 @@ using namespace std;
 #define vl vector<ll>
 #define vvl vector<vl>
 #define rep(i, a, b) for (int i = a; i < b; i++)
+const ll INF = 1e12;
+const int MOD = 1e9 + 7;
