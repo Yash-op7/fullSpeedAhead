@@ -1,61 +1,105 @@
 #include <bits/stdc++.h>
-struct Node{
-	Node *links[2];
-};
+using namespace std;
 
-class trie{
-	Node *root;
+class Node
+{
 public:
-	trie(){
-		root = new Node();
-	}
-
-	void insert(int n){
-		Node *node = root;
-		for(int i=31; i>=0; i--){
-			int bit = (n>>i)&1;
-			if(node->links[bit]== nullptr){
-				node->links[bit] = new Node();
-			}
-			node = node->links[bit];
-		}
-	}
-
-	int maxXOR(int n){
-		Node *node = root;
-		int ans = 0;
-		for(int i=31; i>=0; i--){
-			int needed = !((n>>i)&1);
-			if(node->links[needed] != nullptr){
-				ans = ans | (1<<i);
-				node = node->links[needed];
-			}
-			else node = node->links[!needed];
-		}
-		return ans;
-	}
+    Node *next[2];
+    Node()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            next[i] = NULL;
+        }
+    }
 };
 
-vector<int> maxXorQueries(vector<int> &arr, vector<vector<int>> &queries){
-	//	Write your coode here.
-	int n = arr.size();
-	int m = queries.size();
-	vector<int> ans(m);
-	vector<vector<int>> temp;
-	trie tr;
-	for(int i=0; i<m; i++){
-		temp.push_back({queries[i][1],queries[i][0],i});
-	}
-	sort(arr.begin(), arr.end());
-	sort(temp.begin(), temp.end());
-	int j = 0;
-	for(int i=0; i<m; i++){
-		while(arr[j]<= temp[i][0]){
-			tr.insert(arr[j]);
-			j++;
-		}
-		int x = tr.maxXOR(temp[i][1]);
-		ans[temp[i][2]] = x;
-	}
-	return ans;
+class Trie
+{
+public:
+    Node *root;
+    Trie()
+    {
+        root = new Node();
+    }
+    void insert(int a)
+    {
+        Node *curr = root;
+        for (int i = 31; i >= 0; i--)
+        {
+            int temp = 0;
+            if ((a & (1 << i)))
+            {
+                temp = 1;
+            }
+            if (curr->next[temp] == NULL)
+            {
+                curr->next[temp] = new Node();
+            }
+            curr = curr->next[temp];
+        }
+    }
+    int getMaxXor(int a)
+    {
+        int ans = 0;
+        Node *curr = root;
+        for (int i = 31; i >= 0; i--)
+        {
+            if (curr == NULL)
+            {
+                return -1;
+            }
+            int temp = 0;
+            if ((a & (1 << i)))
+            {
+                temp = 1;
+            }
+            if (curr->next[temp xor 1] == NULL)
+            {
+                curr = curr->next[temp];
+                ans = ans << 1;
+            }
+            else
+            {
+                ans += 1;
+                ans = ans << 1;
+                curr = curr->next[temp xor 1];
+            }
+        }
+        ans /= 2;
+        return ans;
+    }
+};
+
+bool func(vector<int> &a, vector<int> &b)
+{
+    return a[1] < b[1];
+}
+
+vector<int> maxXorQueries(vector<int> &arr, vector<vector<int>> &queries)
+{
+    //	Write your coode here.
+    int q = queries.size();
+    vector<int> ans(q, 0);
+    for (int i = 0; i < q; i++)
+    {
+        queries[i].push_back(i);
+    }
+    sort(arr.begin(), arr.end());
+    sort(queries.begin(), queries.end(), func);
+    Trie *trie = new Trie();
+    int j = 0;
+    for (int i = 0; i < q; i++)
+    {
+        if (queries[i][1] >= arr[j])
+        {
+            while (j < arr.size() && queries[i][1] >= arr[j])
+            {
+                trie->insert(arr[j]);
+                j++;
+            }
+        }
+        ans[queries[i][2]] = trie->getMaxXor(queries[i][0]);
+    }
+    return ans;
 }
