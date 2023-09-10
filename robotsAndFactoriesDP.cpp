@@ -15,7 +15,7 @@ using namespace std;
 class Solution
 {
 public:
-    ll f(int idxRobot, int idxFactory, vi &robots, vvi &factories)
+    ll f(int idxRobot, int idxFactory, vi &robots, vvi &factories, vvl &t)
     {
         if (idxRobot == robots.size())
         {
@@ -25,31 +25,30 @@ public:
         {
             return INT_MAX;
         }
+        if (t[idxRobot][idxFactory] != -1)
+        {
+            return t[idxRobot][idxFactory];
+        }
         if (factories[idxFactory][1] > 0)
         {
             factories[idxFactory][1]--;
-            ll x = f(idxRobot + 1, idxFactory, robots, factories);
-            if(x >= INT_MAX){
-                return f(idxRobot, idxFactory + 1, robots, factories);
-            }
-            ll repair = x + abs(robots[idxRobot] - factories[idxFactory][0]);
+            ll repair = f(idxRobot + 1, idxFactory, robots, factories, t) + abs(robots[idxRobot] - factories[idxFactory][0]);
             factories[idxFactory][1]++;
-            ll dontRepair = f(idxRobot, idxFactory + 1, robots, factories);
-            if(dontRepair >= INT_MAX){
-                return repair;
-            }
-            return min(repair, dontRepair);
+            ll dontRepair = f(idxRobot, idxFactory + 1, robots, factories, t);
+
+            return t[idxRobot][idxFactory] = min(repair, dontRepair);
         }
         else
         {
-            return f(idxRobot, idxFactory + 1, robots, factories);
+            return t[idxRobot][idxFactory] = f(idxRobot, idxFactory + 1, robots, factories, t);
         }
     }
 
     long long minimumTotalDistance(vector<int> &robot, vector<vector<int>> &factory)
     {
-        sort(all(robots));
+        sort(all(robot));
         sort(all(factory));
-        return f(0, 0, robot, factory);
+        vvl t(robot.size(), vl(factory.size(), -1));
+        return f(0, 0, robot, factory, t);
     }
 };
