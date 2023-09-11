@@ -58,16 +58,13 @@ public:
             unionSet(x[0], x[1] + offset + 1);
         }
         unordered_map<int, bool> dict;
-        int ans = 0;
-        for (const auto &x : stones)
-        {
-            int a = find(x[0]);
-            if (dict[a])
-            {
-                continue;
+        int ans= 0;
+        for(auto stone:stones){
+            int a = find(stone[0]);
+            if(!dict[a]){
+                ans++;
+                dict[a]=true;
             }
-            dict[a] = true;
-            ans++;
         }
         return n - ans;
     }

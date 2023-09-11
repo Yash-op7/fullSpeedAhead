@@ -17,13 +17,23 @@ class Solution
 {
 public:
 
-    ll f(int idx, char next, string &s1, string &s2, string &evil){
-
+    ll f(int idx, int y, string &s1, string &s2, string &evil){
+        if(idx == s1.length()){
+            return 1;
+        }
+        char c1 = s1[idx];
+        char c2 = s2[idx];
+        if (y == evil.length() - 1)
+        {
+            if(evil[y] <c1 && evil[y] > c2){
+                return f(idx+1, )
+            }
+        }
     }
 
     int findGoodStrings(int n, string s1, string s2, string evil)
     {
-        return f(0, '0', s1, s2, evil)%MOD;
+        return f(0, 0, s1, s2, evil)%MOD;
     }
 };
 

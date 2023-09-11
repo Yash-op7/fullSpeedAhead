@@ -4,6 +4,7 @@ using namespace std;
 #define vi vector<int>
 #define vvi vector<vi>
 #define vb vector<bool>
+#define vvb vector<vb>
 #define pq priority_queue
 #define ll long long
 #define all(x) (x).begin(), (x).end()

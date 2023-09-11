@@ -37,14 +37,19 @@ class Solution
         }
     }
 	//Function to find number of strongly connected components in the graph.
-    int kosaraju(int V, vector<vector<int>>& adj)
+    int kosaraju(int V, vector<vector<int>>& edges)
     {
         //code here
         vb vis(V, false);
+        vvi adj(V);
+        for(const auto &x:edges){
+            adj[x[0]].push_back(x[1]);
+        }
         vi finishingTimes;
+        finishingTimes.clear();
         dfs(0, adj, vis, finishingTimes);
         vis = vb(V, false);
-        // reverse(finishingTimes.begin(), finishingTimes.end());
+        reverse(finishingTimes.begin(), finishingTimes.end());
         vvi adjRev(V);
         for(int i=0;i<V;i++){
             for(const int &x:adj[i]){
@@ -53,8 +58,7 @@ class Solution
         }
         int ans = 0;
         for(int i=0;i<V;i++){
-            int curr = finishingTimes.back();
-            finishingTimes.pop_back();
+            int curr = finishingTimes[i];
             if(!vis[curr]){
                 dfs(curr, adjRev, vis);
                 ans++;
