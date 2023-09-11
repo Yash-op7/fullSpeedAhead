@@ -15,38 +15,40 @@ const ll INF = 1e12;
 const int MOD = 1e9 + 7;
 
 class Solution {
-    bool dfs(int src, vvi &adj, vb&vis, vb&vis2){
-        vis2[src] = true;
-        if(vis[src]){
-            return true;
-        }
-        vis[src] = true;
-        for(auto x:adj[src]){
-            if(dfs(x, adj, vis, vis2)){
-                return true;
-            }
-        }
-        vis[src] = false;
-        return false;
-    }
+    
 
 public:
 	bool isPossible(int N,int P, vector<pair<int, int> >& p) {
 	    // Code here
         vvi adj(N);
+        vi indegree(N, 0);
         for(auto x:p){
             adj[x.second].push_back(x.first);
+            indegree[x.first]++;
         }
-        vb vis2(N, false);
-        for(int i=0;i<N;i++){
-            if(!vis2[i]){
-                vb vis(N, false);
-                if (dfs(i, adj, vis, vis2))
-                {
-                    return false;
+        queue<int> q;
+        for(auto x:adj){
+            for(auto y:x){
+                if(indegree[y] == 0){
+                    q.push(y);
                 }
             }
         }
-        return true;
+        int cnt = 0;
+        while(!q.empty()){
+            int front = q.front();
+            cnt++;
+            q.pop();
+            for(auto x:adj[front]){
+                indegree[x]--;
+                if(indegree[x] == 0){
+                    q.push(x);
+                }
+            }
+        }
+        if(cnt == N){
+            return true;
+        }
+        return false;
 	}
 };
