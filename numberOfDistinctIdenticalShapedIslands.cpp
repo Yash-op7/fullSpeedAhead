@@ -23,16 +23,28 @@ class Solution {
         vvi ans;
         vis[x][y] = true;
         queue<vi>q;
+        int px = x;
+        int py = y;
         q.push({x, y});
+        ans.push_back({x - px, y - py});
         vi dx  ={ 1, -1, 0, 0};
         vi dy = {0, 0 ,1, -1};
         while(!q.empty()){
             vi front = q.front();
             q.pop();
-            int x=  front[0];
-            int y = front[1];
+             x=  front[0];
+             y = front[1];
+            ans.push_back({x-px, y-py});
+            for(int i=0;i<4;i++){
+                int tx = x + dx[i];
+                int ty = y + dy[i];
+                if(tx >=0 && tx <grid.size() && ty >=0 && ty < grid[0].size() && !vis[tx][ty] && grid[tx][ty] == 1){
+                    vis[tx][ty] = true;
+                    q.push({tx, ty});
+                }
+            }
         }
-
+        return ans;
     }
 
     int countDistinctIslands(vector<vector<int>>& grid) {
@@ -45,10 +57,11 @@ class Solution {
         for(int i=0;i<n;i++){
             for(int j= 0;j<m;j++){
                 if(grid[i][j] == 1 && !vis[i][j]){
-                    set.insert(bfs(i, j, grid, vis));
+                    shapes.insert(bfs(i, j, grid, vis));
                 }
             }
         }
+        return shapes.size();
 
     }
 };
