@@ -6,7 +6,6 @@ using namespace std;
 #define vb vector<bool>
 #define pq priority_queue
 #define ll long long
-#define MOD 1e9 + 7
 #define all(x) (x).begin(), (x).end()
 #define vl vector<ll>
 #define vvl vector<vl>

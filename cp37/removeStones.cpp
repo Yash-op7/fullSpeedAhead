@@ -2,7 +2,7 @@
 using namespace std;
 
 #define vi vector<int>
-const int nmax = 2 * 10000 + 5;
+const int nmax = 20005;;
 
 int parent[nmax];
 int sz[nmax];
@@ -54,8 +54,8 @@ public:
         for (const auto &x : stones)
         {
             makeSet(x[0]);
-            makeSet(x[1] + offset);
-            unionSet(x[0], x[1] + offset);
+            makeSet(x[1] + offset + 1);
+            unionSet(x[0], x[1] + offset + 1);
         }
         unordered_map<int, bool> dict;
         int ans = 0;
