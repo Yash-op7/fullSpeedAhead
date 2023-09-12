@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -14,41 +15,45 @@ using namespace std;
 const ll INF = 1e12;
 const int MOD = 1e9 + 7;
 
-class Solution {
-    
+class Solution
+{
 
 public:
-	bool isPossible(int N,int P, vector<pair<int, int> >& p) {
-	    // Code here
+    bool isPossible(int N, int P, vector<pair<int, int>> &p)
+    {
+        // Code here
         vvi adj(N);
         vi indegree(N, 0);
-        for(auto x:p){
+        for (auto x : p)
+        {
             adj[x.second].push_back(x.first);
             indegree[x.first]++;
         }
         queue<int> q;
-        for(auto x:adj){
-            for(auto y:x){
-                if(indegree[y] == 0){
-                    q.push(y);
-                }
+        for (int i = 0; i < N; i++)
+        {
+            if (indegree[i] == 0)
+            {
+                q.push(i);
             }
         }
         int cnt = 0;
-        while(!q.empty()){
+        vi ans;
+        while (!q.empty())
+        {
             int front = q.front();
             cnt++;
+            ans.push_back(front);
             q.pop();
-            for(auto x:adj[front]){
+            for (auto x : adj[front])
+            {
                 indegree[x]--;
-                if(indegree[x] == 0){
+                if (indegree[x] == 0)
+                {
                     q.push(x);
                 }
             }
         }
-        if(cnt == N){
-            return true;
-        }
-        return false;
-	}
+        return ans;
+    }
 };
