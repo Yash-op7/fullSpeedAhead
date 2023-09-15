@@ -36,14 +36,35 @@ public:
     {
         // code here
         vi dist(N, 1e9);
-        vb vis(N, false);
         dist[0] = 0;
+        vi indegree(N, 0);
         vvi adj[N];
         for(const auto &x:edges){
             adj[x[0]].push_back({x[1], x[2]});
+            indegree[x[1]]++;
         }
-        dfs(0, adj, dist, vis);
-        
+
+        int src = 0;
+        queue<int> q;
+        q.push(src);
+
+        while(!q.empty()){
+            int curr = q.front();
+            q.pop();
+
+            for(auto x:adj[curr]){
+                int dest = x[0];
+                int dis = x[1];
+                if(dist[curr] + dis < dist[dest]){
+                    dist[dest] = dist[curr] + dis;
+                }
+                indegree[dest]--;
+                if(indegree[dest] == 0){
+                    q.push(dest);
+                }
+            }
+        }
+
         for(auto &x:dist){
             if(x == 1e9){
                 x = -1;
