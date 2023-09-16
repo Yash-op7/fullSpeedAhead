@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+using namespace std;
 #define vi vector<int>
 #define vvi vector<vi>
 
@@ -6,6 +7,7 @@ int f(int idx, int mask, vvi &cost)
 {
     int n = cost.size();
     int m = cost[0].size();
+    cout<<n<<" "<<m<<endl;
     if (idx == cost.size())
     {
         if (mask + 1 == (1 << m))
@@ -18,12 +20,12 @@ int f(int idx, int mask, vvi &cost)
         }
     }
     int ans = INT_MAX;
-    int originalMask = mask;
     for (int i = 0; i < m; i++)
     {
-        mask = (mask | (1 << i));
-        ans = min(cost[idx][i] + f(idx + 1, mask, cost), ans);
-        mask = originalMask;
+        // mask = (mask | (1 << i));
+        // ans = min(cost[idx][i] + f(idx + 1, mask, cost), ans);
+        // mask = originalMask;
+        ans = f(idx+1, mask, cost);
     }
     return ans;
 }
