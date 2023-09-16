@@ -1,73 +1,33 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++.h> 
 using namespace std;
+#define vvi vector<vector<int>>
 #define vi vector<int>
-#define vvi vector<vi>
 
-int f(int idx, int mask, vvi &cost)
-{
+int f(int x, int y, int mask, vvi &cost, vvi&t){
     int n = cost.size();
-    int m = cost[0].size();
-    cout<<n<<" "<<m<<endl;
-    if (idx == cost.size())
-    {
-        if (mask + 1 == (1 << m))
-        {
-            return 0;
-        }
-        else
-        {
-            return 1e9;
-        }
-    }
-    int ans = INT_MAX;
-    for (int i = 0; i < m; i++)
-    {
-        // mask = (mask | (1 << i));
-        // ans = min(cost[idx][i] + f(idx + 1, mask, cost), ans);
-        // mask = originalMask;
-        ans = f(idx+1, mask, cost);
-    }
-    return ans;
+    int m= cost[0].size();
+    
 }
 
 int connectTwoGroups(vector<vector<int>> &cost)
 {
-    //	Write your code here.
-    int n = cost.size();
-    int m = cost[0].size();
-    if (n >= m)
-    {
-        return f(0, 0, cost);
-    }
-    else
-    {
-        vvi c(m, vi(n, 0));
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                c[j][i] = cost[i][j];
-            }
-        }
-        return f(0, 0, c);
-    }
-}
-int main()
-{
-    int tt;
-    cin >> tt;
-    while (tt--)
-    {
-        int n, m;
-        cin >> n >> m;
-        vvi costs(n, vi(m, 0));
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                cin >> costs[i][j];
-            }
-        }
-        cout << connectTwoGroups(costs) << endl;
-    }
+	//	Write your code here.
+	int n = cost.size();
+	int m = cost[0].size();
+	int mask = 0;
+	int idx = 0;
+	if(n>=m){
+		vvi t(n, vi(1024, -1));
+		return f(idx, 0, mask, cost, t);
+	}else{
+		vvi c(m, vector<int>(n ,0));
+		for(int i=0;i<n;i++){
+			for(int j=0;j<m;j++){
+				c[j][i] = cost[i][j];
+			}
+		}
+		vvi t(m, vi(1024, -1));
+		return f(idx, 0, mask, c, t);
+	}
+
 }
