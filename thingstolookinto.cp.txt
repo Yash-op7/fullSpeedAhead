@@ -1,0 +1,1 @@
+unordered_set<int>infectedNodes(initial.begin(), initial.end());
