@@ -42,15 +42,15 @@ void dijkstra(int src, vvi adj[], vl &dist)
 
 int solve(int A, vector<vector<int>> &B, int C, int D, vector<vector<int>> &E)
 {
-    vvi adj[A + 1];
+    vvi adj[A + 2];
     for (const auto &x : B)
     {
         adj[x[0]].push_back({x[1], x[2]});
         adj[x[1]].push_back({x[0], x[2]});
     }
 
-    vl distSrc(A + 1, INT_MAX);
-    vl distDest(A + 1, INT_MAX);
+    vl distSrc(A + 2, INT_MAX);
+    vl distDest(A + 2, INT_MAX);
 
     dijkstra(C, adj, distSrc);
     dijkstra(D, adj, distDest);
