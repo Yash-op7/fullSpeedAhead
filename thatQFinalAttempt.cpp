@@ -25,11 +25,32 @@ int solve(int n, int m, vector<string> &maze)
     while(!q.empty()){
         vi curr = q.top();
         q.pop();
-        char c = maze[curr[0]][curr[1]];
-        for(int i=0;i<4;i++){
-            int tx = curr[0] + dx[i];
-            int ty = curr[1] + dy[i];
-            
+        int x = curr[1];
+        int y = curr[2];
+        char c = maze[x][y];
+        int free = 0;
+        if (c == 'R')
+        {
+            free = 1;
         }
+        else if (c == 'D')
+        {
+            free = 3;
+        }
+        else if (c == 'L')
+        {
+            free = 2;
+        }
+        for(int i=0;i<4;i++){
+            int tx = x + dx[i];
+            int ty = y + dy[i];
+            if(tx<n && tx>=0 && ty<m && ty>=0){
+                if(dist[tx][ty] > (i==free?0:1) + dist[x][y]){
+                    dist[tx][ty] = (i==free?0:1) + dist[x][y];
+                    q.push({dist[tx][ty], tx, ty});
+                }
+            }
+        }
+        return dist[n-1][m-1];
     }
 }
