@@ -25,7 +25,7 @@ int f(int x, int y, vector<string> &maze, vvb &vis, vvi &t)
     }
     if (t[x][y] != -1)
     {
-        return t[x][y];
+        // return t[x][y];
     }
     char c = maze[x][y];
     int cost = 1e9;
@@ -92,7 +92,8 @@ int f(int x, int y, vector<string> &maze, vvb &vis, vvi &t)
             }
         }
     }
-    return t[x][y] = cost;
+    // return t[x][y] = cost;
+    return cost;
 }
 
 int solve(int A, int B, vector<string> &C)
@@ -100,7 +101,9 @@ int solve(int A, int B, vector<string> &C)
     vvi t(A, vi(B, -1));
     vvb vis(A, vb(B, false));
     vis[0][0] = true;
-    return f(0, 0, C, vis, t);
+    int ans = f(0, 0, C, vis, t);
+    
+    return ans;
 }
 int main(){
     int n, m;
