@@ -33,14 +33,14 @@ int canReachEnd(int idx, set<int>&h1, vi &a, unordered_map<int, vi>&locs){
             break;
         }
         int val = *it;
+        vi temp = locs[val];
         while(true){
-            vi temp = locs[val];
             if(temp.size() == 0){
                 h1.erase(it);
                 // flag = false;
                 break;
             }else{
-                if((temp.back()<=idx) || ((temp.back() - idx)%2 != 0)){
+                if((temp.back()<=idx) || ((temp.back() - idx)%2 == 0)){
                     temp.pop_back();
                 }else{
                     flag = false;
@@ -58,6 +58,63 @@ int canReachEnd(int idx, set<int>&h1, vi &a, unordered_map<int, vi>&locs){
     }
 }
 
+int canReachEnd2(int idx, set<int> &h1, vi &a, unordered_map<int, vi> &locs)
+{
+    // odds
+    if (idx == a.size() - 1)
+    {
+        return 1;
+    }
+    if (h1.empty())
+    {
+        return 0;
+    }
+    bool flag = true;
+    int loc = -1;
+
+    while (flag)
+    {
+        auto it = h1.lower_bound(a[idx]);
+        if (it == h1.end())
+        {
+            flag = false;
+            break;
+        }
+        int val = *it;
+        vi temp = locs[val];
+        while (true)
+        {
+            if (temp.size() == 0)
+            {
+                h1.erase(it);
+                // flag = false;
+                break;
+            }
+            else
+            {
+                if ((temp.back() <= idx) || ((temp.back() - idx) % 2 == 0))
+                {
+                    temp.pop_back();
+                }
+                else
+                {
+                    flag = false;
+                    loc = temp.back();
+                    temp.pop_back();
+                    break;
+                }
+            }
+        }
+    }
+    if (loc == -1)
+    {
+        return 0;
+    }
+    else
+    {
+        return canReachEnd(loc, h1, a, locs);
+    }
+}
 
 int ninjaJump(vector<int> &x,int n)
 {
@@ -75,8 +132,10 @@ int ninjaJump(vector<int> &x,int n)
     set<int> h2 = h1;
     set<int> h3 = h1;
     for(int i=0;i<n;i++){
-        ans += canReachEnd(i, h2, x, locs2);
-        // ans += canReachEnd2(i, h3, x, locs3);
+        int currResult = canReachEnd(i, h2, x, locs2);
+        // cout<<i<<" "<<currResult<<endl;
+        int result2 = canReachEnd2(i, h3, x, locs3);
+        ans += currResult;
         locs2 = locs;
         locs3 = locs;
         h3 = h1;
@@ -85,7 +144,13 @@ int ninjaJump(vector<int> &x,int n)
     return ans-1;
 }
 
-
+int main(){
+    int n;
+    cin>>n;
+    vi a(n);
+    for(int i=0;i<n;i++)cin>>a[i];
+    cout<<ninjaJump(a, n);
+}
 
 
 
