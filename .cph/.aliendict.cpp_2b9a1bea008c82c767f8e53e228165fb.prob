@@ -1,0 +1,1 @@
+{"name":"Local: aliendict","url":"d:\\fullSpeedAhead\\aliendict.cpp","tests":[{"id":1695134393351,"input":"3\n5\nbaa abcd abca cab cad\n3    \ncaa aaa aab\n2\nca cb","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\fullSpeedAhead\\aliendict.cpp","group":"local","local":true}
