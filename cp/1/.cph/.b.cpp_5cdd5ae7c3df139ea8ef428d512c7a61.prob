@@ -1,0 +1,1 @@
+{"name":"Local: b","url":"d:\\fullSpeedAhead\\cp\\1\\b.cpp","tests":[{"id":1695217660333,"input":"5\n6\n101011\n5\n00000\n9\n100100011\n3\n100\n1\n1\n","output":"0010100\n111111\n0011111100\n0110\n11\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\fullSpeedAhead\\cp\\1\\b.cpp","group":"local","local":true}
