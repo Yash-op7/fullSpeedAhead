@@ -61,6 +61,10 @@ double findMedianSortedArrays(vector<int> &a, vector<int> &b)
                 {
                     ans += b[j - 1];
                 }
+            }else if(i<=n){
+                ans += a[i - 1];
+            }else{
+                ans += b[j - 1];
             }
             return ans / 2;
         }
@@ -110,7 +114,7 @@ double findMedianSortedArrays(vector<int> &a, vector<int> &b)
             }
             cnt1++;
         }
-        if (cnt1 == n1)
+        if (cnt1 == n1+1)
         {
             if (flag)
             {
@@ -120,7 +124,7 @@ double findMedianSortedArrays(vector<int> &a, vector<int> &b)
             {
                 ans = b[j - 1];
             }
-            return ans / 2;
+            return ans;
         }
         else
         {
@@ -143,12 +147,12 @@ double findMedianSortedArrays(vector<int> &a, vector<int> &b)
             {
                 ans = b[j - 1];
             }
-            return ans / 2;
+            return ans;
         }
     }
 }
 int main(){
-    vi a = {1, 3};
-    vi b= {2};
+    vi a = {1, 2};
+    vi b= {3,4};
     cout<<findMedianSortedArrays(a, b)<<endl;
 }
