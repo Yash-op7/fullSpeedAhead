@@ -25,6 +25,7 @@ vector<vector<int>> danceTogether(vector<vector<int>> &edges, int n, int m, int 
         if(x[1] == 0){
             continue;
         }
+        bool done = false;
         while(x[0] > 0 && partner != -1){
             for(int g:adj[x[1]]){
                 if(!vis[g]){
@@ -32,7 +33,12 @@ vector<vector<int>> danceTogether(vector<vector<int>> &edges, int n, int m, int 
                     vis[g] = true;
                     ans.push_back({x[1], g});
                     x[0]--;
+                    done = true;
+                    break;
                 }
+            }
+            if(done){
+                break;
             }
             if(partner == 0){
                 partner = -1;
@@ -43,8 +49,6 @@ vector<vector<int>> danceTogether(vector<vector<int>> &edges, int n, int m, int 
         }
     }
     return ans;
-    vvi temp;
-    return temp;
 }
 
 int main()
