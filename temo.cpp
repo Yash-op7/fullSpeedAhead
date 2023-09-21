@@ -40,7 +40,7 @@ bool f(int idx, int k, int sum, vi &A, vi &ans, vvvb &t)
         bool take = f(idx + 1, k - 1, sum - A[idx], A, ans, t);
         if (take)
         {
-            return  true;
+            return true;
         }
         ans.pop_back();
     }
@@ -69,27 +69,27 @@ vector<vector<int>> Solution::avgset(vector<int> &A)
     for (int i = 1; i < n; i++)
     {
         double temp = avg * i;
-        if ((temp - (int)(temp) == 0) && f(0, i, (int)temp, A, ans1, t))
+        if ((temp - (int)(temp) == 0) &&
+            f(0, i, (int)temp, A, ans1, t))
         {
             int loc = 0;
-            for(int num : ans1){
-                while(loc < n && A[i] != num){
-                    ans2.pus
+            for (int num : ans1)
+            {
+                while (loc < n && A[loc] != num)
+                {
+                    ans2.push_back(A[loc]);
+                    loc++;
                 }
+                loc++;
             }
-            sort(all(ans1));
-            if (A.size() < ans1.size())
+            while (loc < n)
             {
-                ans.push_back(A);
-                ans.push_back(ans1);
+                ans2.push_back(A[loc++]);
             }
-            else
-            {
-                ans.push_back(ans1);
-                ans.push_back(A);
-            }
-            return ans;
+            ans.push_back(ans1);
+            ans.push_back(ans2);
+            break;
         }
     }
-    return {};
+    return ans;
 }
