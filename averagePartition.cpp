@@ -17,36 +17,29 @@ const int MOD = 1e9 + 7;
 
 bool f(int idx, int k, int sum, vi &A, vi &ans, vvvb &t)
 {
-    if (k == 0 && sum == 0)
-    {
-        return true;
-    }
-    if(k==0){
-        return false;
-    }
-    if (idx == A.size())
-    {
-        return false;
-    }
-    if (!t[idx][k][sum])
-    {
-        return false;
-    }
-    bool take = false;
-    if (A[idx] <= sum)
-    {
-        take = f(idx + 1, k - 1, sum - A[idx], A, ans, t);
-        if (take)
-        {
-            ans.push_back(A[idx]);
-            return t[idx][k][sum] = true;
+    if(k == 0){
+        if(sum == 0){
+            return true;
         }
+        return false;
     }
-    bool dont = f(idx + 1, k, sum, A, ans, t);
+    int n = A.size();
+    if(idx == n){
+        return false;
+    }
+    if(!t[idx][k][sum]){
+        return false;
+    }
+    bool take = f(idx + 1, k - 1, sum - A[idx], A, ans, t);
+    if(take){
+        ans.push_back(A[idx]);
+        return t[idx][k][sum] = true;
+    }
+    bool dont = f(idx + 1, k ,sum, A, ans, t);
     return t[idx][k][sum] = dont;
 }
 
-vector<vector<int>> Solution::avgset(vector<int> &A)
+vector<vector<int>>   avgset(vector<int> &A)
 {
     int n = A.size();
     double sum = 0;
@@ -60,23 +53,27 @@ vector<vector<int>> Solution::avgset(vector<int> &A)
     vi ans1;
     vi ans2;
     vvi ans;
-    vvvb t(101, vvb(101, vb(5001, true)));
+    vvvb t(101, vvb(101, vb(5001, true)));      // 5 x 1e7
     for (int i = 1; i <= n; i++)
     {
         double temp = avg * i;
         if ((temp - (int)(temp) == 0) && f(0, i, (int)temp, A, ans1, t))
         {
-            sort(all(ans1));
-            ans.push_back(ans1);
-            for (int x : ans1)
-            {
-                A.erase(find(all(A), x));
+            for(int j=0;j<ans1.size();j++){
+                int currToRemove = ans1[i];
+                auto it = find(all(A), currToRemove);
+                A.erase(it);
             }
-            ans.push_back(A);
-            if(A.size() == 0 || ans1.size() == 0){
-                return {};
+            // ans.push_back(A);
+            if(A.size() < ans1.size()){
+                ans.push_back(A);
+                ans.push_back(ans1);
+            }else{
+                ans.push_back(ans1);
+                ans.push_back(A);
             }
             return ans;
+            break;
         }
     }
     return ans;
