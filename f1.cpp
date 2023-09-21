@@ -16,7 +16,7 @@ const int MOD = 1e9 + 7;
 
 class Solution
 {
-    bool dfs(int src, int dest, vvi adj[], vb &vis, int &prevAns, int &currAns, vi &temp)
+    bool dfs(int src, int dest, vvi adj[], vb &vis, int &prevAns, int &currAns, vi &temp, vvi &dp, vb&vis2)
     {
         if (src == dest)
         {
@@ -27,6 +27,9 @@ class Solution
             }
             return false;
         }
+        if(vis2[src]){
+            return dp[src];
+        }
         vi currPath;
         for (const auto &x : adj[src])
         {
@@ -35,7 +38,7 @@ class Solution
                 vis[x[0]] = true;
                 int curr = x[1] + currAns;
                 vi temp1;
-                if (dfs(x[0], dest, adj, vis, prevAns, curr, temp1))
+                if (dfs(x[0], dest, adj, vis, prevAns, curr, temp1, dp, vis2))
                 {
                     temp1.push_back(x[0] + 1);
                     currPath = temp1;
@@ -50,6 +53,8 @@ class Solution
         }
         // temp = currPath;
         temp.insert(temp.end(), currPath.begin(), currPath.end());
+        vis2[src] = true;
+        dp[src] = temp;
         return true;
     }
 
@@ -68,7 +73,12 @@ public:
         int k = 0;
         vis[0] = true;
         int prevA = INT_MAX;
-        bool kk = dfs(0, n - 1, adj, vis, prevA, k, ans);
+        vvi dp(n);
+        vb vis2(n, false);
+        bool kk = dfs(0, n - 1, adj, vis, prevA, k, ans, dp, vis2);
+        if(ans.empty()){
+            return {-1};
+        }
         ans.push_back(1);
         reverse(ans.begin(), ans.end());
         return ans;
