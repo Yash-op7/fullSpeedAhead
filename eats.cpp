@@ -1,60 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int f(int idx, vector<int> &a)
-{
-    int n = a.size();
-    if (idx == -1)
-    {
-        int sum1 = 0, sum2 = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if (i % 2 == 0)
-            {
-                sum1 += a[i];
-            }
-            else
-            {
-                sum2 += a[i];
-            }
-        }
-        return max(sum1, sum2);
+#define vi vector<int>
+#define vvi vector<vi>
+#define vvvi vector<vvi>
+#define vb vector<bool>
+#define vvb vector<vb>
+#define vvvb vector<vvb>
+#define pq priority_queue
+#define ll long long
+#define all(x) (x).begin(), (x).end()
+#define vl vector<ll>
+#define vvl vector<vl>
+#define rep(i, a, b) for (int i = a; i < b; i++)
+const ll INF = 1e12;
+const int MOD = 1e9 + 7;
+
+int f(int s, int e, vi &a){
+    if(s>=e){
+        return 0;
     }
-    else
-    {
-        int sum1 = 0;
-        int sum2 = 0;
-        int val = a[idx];
-        for (int i = 0; i < n; i += 2)
-        {
-            if (i == idx)
-            {
-                continue;
-            }
-            sum1 += a[i];
-        }
-        for (int i = 1; i < n; i += 2)
-        {
-            if (i == idx)
-            {
-                continue;
-            }
-            sum2 += a[i];
-        }
-        return val + min(sum1, sum2);
-    }
+    int pick1 = a[s] + max(f(s+2, e, a), f(s+1, e-1, a));
+    int pickn = a[e] + max(f(s+1, e-1, a) , f(s, e-2, a));
+    return max(pick1, pickn);
 }
 
 int getMaxFruits(vector<int> &a, int n)
 {
     // Write your code here
-    n = a.size();
-    if (n % 2 == 0)
-    {
-        return f(-1, a);
-    }
-    else
-    {
-        return max(f(0, a), f(n - 1, a));
-    }
+    return f(0, n-1, a);
 }
