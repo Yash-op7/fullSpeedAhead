@@ -3,8 +3,10 @@ using namespace std;
 
 #define vi vector<int>
 #define vvi vector<vi>
+#define vvvi vector<vvi>
 #define vb vector<bool>
 #define vvb vector<vb>
+#define vvvb vector<vvb>
 #define pq priority_queue
 #define ll long long
 #define all(x) (x).begin(), (x).end()
