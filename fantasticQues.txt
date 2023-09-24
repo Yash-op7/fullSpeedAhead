@@ -1,1 +1,2 @@
 https://www.interviewbit.com/problems/min-cost-path/
+https://www.codingninjas.com/studio/problems/allocate-books_1089560?source=youtube&campaign=striver_dp_videos&leftPanelTab=1
