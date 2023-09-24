@@ -1,0 +1,1 @@
+{"name":"Local: makeArrayFromSubsequences","url":"d:\\fullSpeedAhead\\makeArrayFromSubsequences.cpp","tests":[{"id":1695580713002,"input":"2\n2\n1 5 9\n1 3 5\n3\n5 9\n1 3 5\n1 5 2\n\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\fullSpeedAhead\\makeArrayFromSubsequences.cpp","group":"local","local":true}
