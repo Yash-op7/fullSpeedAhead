@@ -43,18 +43,34 @@ const int MOD = 1e9 + 7;
 //     return t[idx][C] = ans % MOD;
 // }
 
-int f(int B, int A, int C){
+
+int fact(int x){
+    if(x<=1){
+        return 1;
+    }
+    return x*fact(x-1);
+}
+int ncr(int n, int r){
+    return fact(n)/(fact(r)*fact(n-r));
+}
+
+
+int f(int B, int A, int C, int cA){
     if (A == 0 && C == 0)
     {
         return 1;
+    }
+    if(A<=0){
+        return 0;
     }
     if(B==0){
         return 0;
     }
     int ways = C/B;
-    ll ans = 0;
-    for(int i=0;i<=ways;i+){
-        ans += f(B-1, A-i, C-i*B);
+    int ans = 0;
+    for(int i=0;i<=ways;i++){
+        int x = ncr(A, i);
+        ans += x*f(B-1, A-i, C-i*B, cA);
     }
     return ans;
 }
@@ -81,5 +97,5 @@ int Solution::findDiceSum(int A, int B, int C)
     //     }
     // }
     // return t[A][C];
-    return f(B, A, C);
+    return f(B, A, C, A);
 }
