@@ -26,30 +26,6 @@ void precompute()
     }
 }
 
-int fact(int n){
-    if(n<=1){
-        return 1;
-    }
-    return n*fact(n-1);
-}
-
-ll f(int idx, string &s){
-    if(idx >= s.length()-1){
-        return 1;
-    }
-    if(s[idx] == s[idx+1] ){
-        // return 2*(1  +f(idx+1, s));
-        int i = idx+1;
-        int cnt=1;
-        while(i < s.length() && s[i] == s[idx]){
-            cnt++;
-            i++;
-        }
-        return ((C[cnt]) * ( f(i, s)))%MOD;
-    }else{
-        return f(idx+1, s)%MOD;
-    }
-}
 
 ll f1(int idx, string &s){
     if (idx == s.length() - 1)
@@ -78,7 +54,23 @@ int main()
     {
         getline(cin, s);
         int ans1=f1(0, s);
-        int ans = f(0, s);
-        cout<<ans1<<" "<<ans<<'\n';
+
+        ll k = 1;
+        int cnt = 0;int n = s.length();
+        for(int i=0;i<s.length()-1;i++){
+            if(s[i] == s[i+1]){
+                int j=i+1;
+                int currCnt = 1;
+                while(j<n && s[i] == s[j]){
+                    currCnt++;
+                    j++;
+                }
+                i = j-1;
+                k = (k*currCnt)%MOD;
+                cnt += currCnt-1;
+            }
+        }
+        ll ans2 = (k * C[cnt])%MOD;
+        cout<<ans1<<" "<<ans2<<'\n';
     }
 }

@@ -1,1 +1,1 @@
-{"name":"Local: c","url":"d:\\fullSpeedAhead\\24septDiv2\\c.cpp","tests":[{"id":1695567937395,"input":"3\n10010\n111\n0101","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\fullSpeedAhead\\24septDiv2\\c.cpp","group":"local","local":true}
+{"name":"Local: c","url":"d:\\fullSpeedAhead\\24septDiv2\\c.cpp","tests":[{"id":1695567937395,"input":"3\n10010\n111\n1100","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\fullSpeedAhead\\24septDiv2\\c.cpp","group":"local","local":true}
