@@ -1,2 +1,8 @@
 https://www.interviewbit.com/problems/min-cost-path/
 https://www.codingninjas.com/studio/problems/allocate-books_1089560?source=youtube&campaign=striver_dp_videos&leftPanelTab=1
+
+https://leetcode.com/problems/largest-rectangle-in-histogram/description/
+
+https://leetcode.com/problems/trapping-rain-water/description/
+
+https://leetcode.com/problems/cheapest-flights-within-k-stops/description/
