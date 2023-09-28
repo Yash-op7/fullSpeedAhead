@@ -38,7 +38,7 @@ int maxStrength(vector<int> &a, vector<vector<int>> &s, int k)
 {
     int n = s.size();
     int p = s[0].size();
-    vector<vector<vector<long long>>> dp(n + 1, vector<vector<long long>>((1<<(p)), vector<long long>(k + 1, -1)));
+    vector<vector<vector<long long>>> dp(n + 1, vector<vector<long long>>((1<<(p+1)), vector<long long>(k + 1, -1)));
     return (int)fn(0, 0, k, a, s, dp);
 }
 
