@@ -1,4 +1,5 @@
-
+#include<bits/stdc++.h>
+using namespace std;
 #define vi vector<int> 
 
 class Solution {
@@ -32,7 +33,7 @@ public:
         }
         int val = sum/k;
         int mask = 0;
-        vector<vector<vector<bool>>>t(nums.size(), vector<vi>(val+1, vi((1<<16), true)));
+        vector<vector<vector<bool>>> t(nums.size(), vector<vector<bool>>(val + 1, vector<bool>((1 << 16), true)));
         for(int i=0;i<k-1;i++){
             if(!f(0, val, mask, nums, t)){
                 return false;
