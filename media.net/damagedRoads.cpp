@@ -24,41 +24,54 @@ int main(){
     }
     vvb vis(n, vb(m, false));
     vis[0][0] = true;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            int up, down, left, right;
-            up = down = left = right = 1e9;
-            if(i-1 >= 0 && !vis[i-1][j]){
-                up = a[i-1];
-            }
-            if (j - 1 >= 0 && !vis[i ][j-1])
+    queue<vi>q;
+    q.push({0, 0});
+    vi dx = {0,0,-1,1};
+    vi dy = {1, -1, 0, 0};
+    while(!q.empty()){
+        vi curr = q.front();
+        q.pop();
+        int i= curr[0];
+        int j= curr[1];
+        int up, down, left, right;
+        up = down = left = right = 1e9;
+        if (i - 1 >= 0 && !vis[i-1][j])
+        {
+            up = a[i - 1];
+        }
+        if (j - 1 >= 0 && !vis[i][j-1])
+        {
+            left = b[j - 1];
+        }
+        if (i + 1 < n  && !vis[i+1][j ])
+        {
+            down = a[i];
+        }
+        if (j + 1 < m  && !vis[i][j + 1])
+        {
+            right = b[j];
+        }
+        if ((min(min(up, down), min(left, right))) == 1e9){
+            break;
+        }
+        ans = (ans + min(min(up, down), min(left, right))) % MOD;
+        if ((min(min(up, down), min(left, right))) == up)
             {
-                left = b[j-1];
+                q.push({i - 1, j});
+                vis[i - 1][j] = true;
             }
-            if (i + 1 < n - 1 && !vis[i +1][j])
-            {
-                down = a[i];
-            }
-            if (j + 1 < m - 1 && !vis[i ][j+1])
-            {
-                right = b[j];
-            }
-            if(min(min(up, down) ,min(left, right)) == up){
-                vis[i-1][j] = true;
-            }
-            else if (min(min(up, down), min(left, right)) == down)
-            {
-                vis[i + 1][j] = true;
-            }
-            else if (min(min(up, down), min(left, right)) == left)
-            {
-                vis[i][j-1] = true;
-            }
-            else
-            {
-                vis[i][j + 1] = true;
-            }
-            ans = (ans + min(min(up, down), min(left, right))) % MOD;
+        else if ((min(min(up, down), min(left, right))) == down)
+        {
+            q.push({i + 1, j});
+            vis[i + 1][j] = true;
+        }
+        else if ((min(min(up, down), min(left, right))) == left)
+        {
+            q.push({i, j-1});
+            vis[i][j-1] = true;
+        }else{
+            q.push({i, j + 1});
+            vis[i][j + 1] = true;
         }
     }
     cout<<ans<<'\n';
