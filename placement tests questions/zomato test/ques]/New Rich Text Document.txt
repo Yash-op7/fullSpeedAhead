@@ -1,0 +1,23 @@
+Given three integers X, Y and Z, your task is to find the sum of all the numbers formed having 4 at most X times, 5 at most Y times, and 6 at most Z times
+
+Output the sum modulo (109+7)
+
+Input
+The first line of input contains three integer x,y,z. (1≤x,y,z≤60)
+
+Output
+Output the sum of all the numbers formed
+
+Examples
+input
+1 1 1
+output
+3675
+input
+0 0 0
+output
+0
+Note
+For test case 1:
+
+Explanation: 4 + 5 + 6 + 45 + 54 + 56 + 65 + 46 + 64 + 456 + 465 + 546 + 564 + 645 + 654 = 3675

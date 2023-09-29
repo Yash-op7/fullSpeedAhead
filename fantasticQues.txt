@@ -6,3 +6,6 @@ https://leetcode.com/problems/largest-rectangle-in-histogram/description/
 https://leetcode.com/problems/trapping-rain-water/description/
 
 https://leetcode.com/problems/cheapest-flights-within-k-stops/description/g
+
+
+https://www.codingninjas.com/studio/problems/minimum-cost-to-destination_630411?leftPanelTab=1
