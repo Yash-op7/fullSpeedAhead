@@ -1,0 +1,1 @@
+{"name":"Local: alefTheFrog","url":"d:\\fullSpeedAhead\\hackerrank graph theory\\alefTheFrog.cpp","tests":[{"id":1696104901498,"input":"3 7 0\n##OOO##\n%OOAOO*\n##OOO##","output":"0.5000000000"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\fullSpeedAhead\\hackerrank graph theory\\alefTheFrog.cpp","group":"local","local":true}
