@@ -1,6 +1,5 @@
-Copy
 #include <bits/stdc++.h>
-    using namespace std;
+using namespace std;
 
 int f(int n, vector<int> &t)
 {
@@ -26,5 +25,9 @@ int main()
     int n;
     cin >> n;
     vector<int> t(n, -1);
-    cout << f(n, t) << endl;
+    // cout << f(n, t) << endl;
+    int x = f(n, t);
+    for(int i=n;i>=3;i--){
+        cout<<t[i-1]<<" ";
+    }
 }

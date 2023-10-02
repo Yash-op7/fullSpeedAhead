@@ -9,3 +9,5 @@ https://leetcode.com/problems/cheapest-flights-within-k-stops/description/g
 
 
 https://www.codingninjas.com/studio/problems/minimum-cost-to-destination_630411?leftPanelTab=1
+
+https://www.codingninjas.com/studio/problems/settle-debt_1232658?leftPanelTab=0
