@@ -5,6 +5,15 @@ using namespace std;
 #define vvi vector<vi>
 #define vb vector<bool>
 
+
+
+int f(int x, int y, int b, vector<vector<char>> &maze, vector<vb>&vis){
+    if(maze[x][y] == 'G'){
+        return 0;
+    }
+    
+}
+
 int main(){
     int n,m,b;
     cin>>n>>m>>b;
@@ -20,5 +29,5 @@ int main(){
         }
     }
     vector<vb> vis(n, vb(m, false));
-    return f(x, y, maze, vis, )
+    return f(x, y, b, maze, vis);
 }
