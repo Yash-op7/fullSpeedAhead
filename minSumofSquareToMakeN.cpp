@@ -1,37 +1,30 @@
-#include<bits/stdc++.h>
-using namespace std;
+Copy
+#include <bits/stdc++.h>
+    using namespace std;
 
-int f(int n){
-    queue<int> q;
-    q.push(n);
-    q.push(-1);
-    int ans = n;
-    int spread = 0;
-    while(!q.empty()){
-        int x = q.front();
-        if(spread>=4){
-            return 4;
-        }
-        q.pop();
-        if(x == 0){
-            return spread;
-        }
-        if(x == -1){
-            if(!q.empty()){
-                q.push(-1);
-                spread++;
-            }
-        }else{
-            for(int i=1;i*i<=x;i++){
-                q.push(x-i*i);
-            }
-        }
+int f(int n, vector<int> &t)
+{
+    if (n == 0 || n == 1 || n == 2 || n == 3)
+    {
+        return n;
     }
-    return -1;
+    if (t[n - 1] != -1)
+    {
+        return t[n - 1];
+    }
+    int ans = n;
+    for (int i = 1; i * i <= n; i++)
+    {
+        ans = min(ans, f(n - i * i, t) + 1);
+    }
+    return t[n - 1] = ans;
 }
 
-int main(){
+int main()
+{
+
     int n;
-    cin>>n;
-    cout<<f(n)<<endl;
+    cin >> n;
+    vector<int> t(n, -1);
+    cout << f(n, t) << endl;
 }
