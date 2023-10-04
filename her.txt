@@ -1,5 +1,8 @@
-https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description/
+https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description
+
+https://www.codingninjas.com/studio/problems/k-palindrome_2434296
+
+https://www.codingninjas.com/studio/problems/count-palindromic-subsequences_1062696
 
 
 
-https://www.codingninjas.com/studio/problems/number-of-squareful-arrays_1235194?leftPanelTab=0
