@@ -3,7 +3,7 @@ using namespace std;
 #define vi vector<int>
 int findToll(int n, int m, vector<vector<int>> &time, vector<vector<int>> &toll) 
 {
-    // Write your code here	
+    // Write your code here	d
     priority_queue<vi, vector<vi>, greater<vi>> q;
     vi dist(n, 1e9);
     int src = 0, dest = n-1;
