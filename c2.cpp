@@ -32,19 +32,19 @@ int main()
             loc[a[i]].push_back(i);
         }
         sort(all(a));
+        int last = n - 1;
+        int first = 0;
         vi ans(k, 0);
         for(int i=0;i<n;i++){
             if(ans[a[i]-1] == 0){
-                int first = 0;
-                int last = n-1;
                 int curr = a[i];
-                for(int j=0;j<n;j++){
+                for(int j=first;j<n;j++){
                     if(!vis[j]){
                         first = j;
                         break;
                     }
                 }
-                for(int j=n-1;j>=0;j--){
+                for(int j=last;j>=0;j--){
                     if(!vis[j]){
                         last = j;
                         break;

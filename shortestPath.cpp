@@ -40,7 +40,8 @@ public:
         dist[0] = 0;
         vvi adj[N];
         for(const auto &x:edges){
-            adj[x[0]].push_back({x[1], x[2]});
+            adj[x[0]].push_back(x[1]);
+            adj[x[0]].push_back(x[0]);
         }
         dfs(0, adj, dist, vis);
         return dist;

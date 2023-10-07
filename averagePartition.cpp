@@ -27,28 +27,23 @@ using namespace std;
 const ll INF = 1e12;
 const int MOD = 1e9 + 7;
 
-bool isPossible(int idx, int size, int sum, vector<int> &A, vector<int> &A1, vector<vector<vector<bool>>> &dp)
+bool isPossible(int idx, int size, int sum,
+ vector<int> &A, vector<int> &A1,
+  vector<vector<vector<bool>>> &dp)
 {
-    // base cases
     if (size == 0)
         return sum == 0;
     if (idx == A.size())
         return false;
-    // The very first time we get a solution we exit. So calcuations are getting repeated for false cases. 
-    // So we check if (idx,size,sum) has already been
-    // calculated i.e been set to false. If yes, return else calculate save and return.
     if (dp[idx][size][sum] == false)
         return dp[idx][size][sum];
     if (A[idx] <= sum)
     {
-        // option1:use idx th element
         A1.push_back(A[idx]);
-        if (isPossible(idx + 1, size - 1, sum - A[idx], A, A1, dp))
+        if (isPossible(idx + 1, size - 1, sum - A[idx]
+        , A, A1, dp))
             return true;
         A1.pop_back();
-        // this can also be done since A[idx]> sum so there's no point going any further since A is sorted
-        //  if(isPossible(idx+1,size,sum,A,A1,dp))
-        //  return true;
     }
     if (isPossible(idx + 1, size, sum, A, A1, dp))
         return true;
@@ -75,7 +70,7 @@ vector<vector<int>> Solution::avgset(vector<int> &A)
             vector<int> A1;
             if (isPossible(0, n1, s1, A, A1, dp))
             {
-                vector<int> A2;
+                vector<int> A2; 
                 int i = 0;
                 for (int num : A1)
                 {

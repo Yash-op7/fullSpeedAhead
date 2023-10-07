@@ -43,34 +43,56 @@ const int MOD = 1e9 + 7;
 //     return t[idx][C] = ans % MOD;
 // }
 
-
-int fact(int x){
-    if(x<=1){
+int fact(int x)
+{
+    if (x <= 1)
+    {
         return 1;
     }
-    return x*fact(x-1);
+    return x * fact(x - 1);
 }
-int ncr(int n, int r){
-    return fact(n)/(fact(r)*fact(n-r));
+int ncr(int n, int r)
+{
+    return fact(n) / (fact(r) * fact(n - r));
 }
 
+long long C[1001];
+void precompute()
+{
+    C[0] = 1;
+    for (int i = 1; i < 1001; i++)
+    {
+        C[i] = (C[i - 1] * i) % MOD;
+    }
+}
 
-int f(int B, int A, int C, int cA){
+long long nCr(int n, int r)
+{
+    if (n < r)
+        return 0;
+    return C[n] / ((C[r] * C[n - r]) % MOD);
+}
+
+int f(int B, int A, int C, int cA)
+{
     if (A == 0 && C == 0)
     {
         return 1;
     }
-    if(A<=0){
+    if (A <= 0)
+    {
         return 0;
     }
-    if(B==0){
+    if (B == 0)
+    {
         return 0;
     }
-    int ways = C/B;
+    int ways = C / B;
     int ans = 0;
-    for(int i=0;i<=ways;i++){
-        int x = ncr(A, i);
-        ans += x*f(B-1, A-i, C-i*B, cA);
+    for (int i = 0; i <= ways; i++)
+    {
+        int x = nCr(A, i);
+        ans += x * f(B - 1, A - i, C - i * B, cA);
     }
     return ans;
 }
@@ -97,5 +119,6 @@ int Solution::findDiceSum(int A, int B, int C)
     //     }
     // }
     // return t[A][C];
+    precompute();
     return f(B, A, C, A);
 }

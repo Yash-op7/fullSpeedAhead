@@ -1,85 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool f(int s, int e, string a, string b, vector<vector<int>> &t, vector<vector<int>> &t2, unordered_map<string, int> &t3)
-{
+#define vi vector<int>
+#define vvi vector<vi>
+#define vb vector<bool>
+#define vvb vector<vb>
+#define pq priority_queue
+#define ll long long
+#define all(x) (x).begin(), (x).end()
+#define vl vector<ll>
+#define vvl vector<vl>
+#define rep(i, a, b) for (int i = a; i < b; i++)
+const ll INF = 1e12;
+const int MOD = 1e9 + 7;
+
+bool f(int s, int e, const string &A, const string &B){
     if(s == e){
-        if(a[s] == b[e]){
+        if(A[s] == B[s]){
             return true;
         }else{
             return false;
         }
     }
-    if(s>e){
-        return false;
+    int n = A.size();
+    for(int i=0;i<n-1;i++){
+        bool left = f(s, i, A, B);
+        bool right = f(i+1, e, A, B);
+        bool lr = f()
     }
-    if(t[s][e] != -1){
-        if(t[s][e] == 1){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    if(t2[s][e] != -1){
-        if(t2[s][e] == 1) {
-            return true;
-        }else{
-            return false;
-        }
-    }
-    if(t3[a.substr(s, e+1)] != 0){
-        if (t3[a.substr(s, e + 1)] == 1)
-        {
-            return true;
-        }
-        else if (t3[a.substr(s, e + 1)] == 0)
-        {
-            return false;
-        }
-    }
-    bool flag = false;
-    for(int idx = s;idx<e;idx++){
-        flag = (f(s, idx, a, b, t, t2, t3) && f(idx+1 , e, a, b, t, t2, t3));
-        if(flag){
-            t3[a.substr(s, idx+1)] = 1;
-            t3[a.substr(idx+1)] = 1;
-            return true;
-        }
-        t3[a.substr(s, idx + 1)] = 0;
-        t3[a.substr(idx + 1)] = 0;
-        string scramble = a.substr(idx+1) + a.substr(0, idx+1);
-        flag = (f(s, s + e - idx - 1, scramble, b, t, t2, t3) && f(s + e - idx, e, scramble, b, t, t2, t3));
-        if(flag){
-            return true;
-        }
-    }
-    return false;
 }
 
-int Solution::isScramble(const string A, const string B) {
-    
-    if(A=="i" && B == "i"){
-        return 1;
-    }
-    string a = A;
-    string b = B;
-    bool check = false;
-    for(int i=0;i<a.length();i++){
-        if(a[i] != b[i]){
-            check = true;
-            break;
-        }
-    }
-    if(!check){
-        return 1;
-    }
-    vector<vector<int>> t(51, vector<int> (51,-1));
-    vector<vector<int>> t2(51, vector<int> (51,-1));
-    unordered_map<string, int> t3;
-    t3.clear();
-    if( f(0, a.length() - 1, a, b, t, t2, t3)){
-        return 1;
-    }else{
-        return 0;
-    }
+int isScramble(const string A, const string B)
+{
+    return f(0, A.length() - 1, A, B);
 }

@@ -5,6 +5,7 @@ using namespace std;
 #define vvi vector<vi>
 #define vb vector<bool>
 #define vvb vector<vb>
+#define vvvb vector<vvb>
 #define pq priority_queue
 #define ll long long
 #define all(x) (x).begin(), (x).end()
@@ -14,7 +15,7 @@ using namespace std;
 const ll INF = 1e12;
 const int MOD = 1e9 + 7;
 
-bool f(int idx, int k, int sum, vi &A, vi &ans)
+bool f(int idx, int k, int sum, vi &A, vi &ans, vvvb &t)
 {
     if (k == 0 && sum == 0)
     {
@@ -24,18 +25,22 @@ bool f(int idx, int k, int sum, vi &A, vi &ans)
     {
         return false;
     }
+    if (!t[idx][k][sum])
+    {
+        return false;
+    }
     bool take = false;
     if (A[idx] <= sum)
     {
-        take = f(idx + 1, k - 1, sum - A[idx], A, ans);
+        take = f(idx + 1, k - 1, sum - A[idx], A, ans, t);
         if (take)
         {
             ans.push_back(A[idx]);
-            return true;
+            return t[idx][k][sum] = true;
         }
     }
-    bool dont = f(idx + 1, k, sum, A, ans);
-    return dont;
+    bool dont = f(idx + 1, k, sum, A, ans, t);
+    return t[idx][k][sum] = dont;
 }
 
 vector<vector<int>> avgset(vector<int> &A)
@@ -46,15 +51,17 @@ vector<vector<int>> avgset(vector<int> &A)
     {
         sum += x;
     }
+    sort(all(A));
 
     double avg = sum / n;
     vi ans1;
     vi ans2;
     vvi ans;
-    for (int i = 0; i <= n; i++)
+    vvvb t(101, vvb(101, vb(5001, true)));
+    for (int i = 1; i <= n; i++)
     {
         double temp = avg * i;
-        if ((temp - (int)(temp) == 0) && f(0, i, (int)temp, A, ans1))
+        if ((temp - (int)(temp) == 0) && f(0, i, (int)temp, A, ans1, t))
         {
             sort(all(ans1));
             ans.push_back(ans1);
@@ -62,7 +69,6 @@ vector<vector<int>> avgset(vector<int> &A)
             {
                 A.erase(find(all(A), x));
             }
-            sort(all(A));
             ans.push_back(A);
             return ans;
         }

@@ -33,18 +33,19 @@ int minMalwareSpread(vector<vector<int>>& graph, vector<int>& malware)
 		for(int j=0;j<n;j++){
 			// for the ith malware go to each edge from it
 			currCount = 0;
+            bool infected = false;
+            int branchCnt = 0;
 			if(graph[x][j] == 1){
-				int branchCnt = 0;
-				bool infected = false;
 				queue<int> q;
 				if(!vis[j]){
 					q.push(j);
 					vis[j] = true;
-					if(isInfected[j])){
-						infected = true;
-						break;
-					}
-					branchCnt++;
+                    if (isMalware[j])
+                        {
+                            infected = true;
+                            break;
+                        }
+                    branchCnt++;
 					while(!q.empty()){
 						int top = q.front();
 						q.pop();
@@ -52,25 +53,27 @@ int minMalwareSpread(vector<vector<int>>& graph, vector<int>& malware)
 							if(graph[top][z] == 1 && !vis[z]){
 								q.push(z);
 								vis[z] = true;
-								if(isInfected[z]){
-									infected=true;
+                                if (isMalware[z])
+                                {
+                                    infected=true;
 									break;
-								}
-								branchCnt++;
+                                }
+                                branchCnt++;
 							}
 						}
 					}
 				}
 			}
-			if(!infected){
-					currCount += branchCnt;
-				}
-			if(currCount > maxCount){
-				ans = i;
-				maxCount = currCount;
-			}
+            if (!infected)
+            {
+                currCount += branchCnt;
+            }
 		}
-	}
+        if (currCount > maxCount)
+        {
+            ans = i;
+            maxCount = currCount;
+        }
+    }
 	return ans;
-	
 }

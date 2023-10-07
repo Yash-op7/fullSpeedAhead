@@ -15,3 +15,38 @@ using namespace std;
 #define rep(i, a, b) for (int i = a; i < b; i++)
 const ll INF = 1e12;
 const int MOD = 1e9 + 7;
+
+class Solution
+{
+public:
+    int sumDistance(vector<int> &a, string s, int d)
+    {
+        stack<vi> stk;
+        // RLL
+        int idx = 0;
+        int n = s.length();
+        vi dist(n, 0);
+        while (idx < n)
+        {
+            if (s[idx] == 'R')
+            {
+                stk.push({i, 0});
+            }
+            else
+            {
+                if (!stk.empty())
+                {
+                    vi curr = stk.top();
+                    stk.pop();
+                    int l, lt, r, rt;
+                    l = a[curr[0]];
+                    lt = curr[1];
+                    r = a[idx];
+                    rt = 0;
+                    r = r- lt;
+                    
+                }
+            }
+        }
+    }
+};

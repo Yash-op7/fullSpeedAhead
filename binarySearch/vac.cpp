@@ -44,7 +44,7 @@ bool check(int curr, int x, int n, int total){
         }
     }
 	k = curr;
-	for(int i=x+1;i<=n;i++){
+	for(int i=x+1; ;i++){
 		if(k == 1){
 			total-=1;
 		}else{

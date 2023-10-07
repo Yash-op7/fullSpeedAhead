@@ -37,12 +37,23 @@ int f(int x, int y, bool coming, vvi &a, vvvi &t)
     {
         return 0;
     }
+    int bit;
+    if (coming)
+    {
+        bit = 1;
+    }
+    else
+    {
+        bit = 0;
+    }
     if (!coming && x == n - 1 && y == n - 1)
     {
-        return f(x, y, !coming, a, t);
+        t[x][y][bit] = f(x, y, !coming, a, t);
+        return t[x][y][1 - bit] = t[x][y][bit];
     }
-    if(t[x][y][coming] != -1){
-        return t[x][y][coming];
+    if (t[x][y][bit] != -1)
+    {
+        return t[x][y][bit];
     }
     if (!coming)
     {
@@ -68,9 +79,9 @@ int f(int x, int y, bool coming, vvi &a, vvvi &t)
         {
             // a[x+1][y] = temp1;
             // a[x][y+1] = temp2;
-            return -1e5;
+            return t[x][y][bit] = -1e5;
         }
-        return t[x][y][coming] = max(d, r);
+        return t[x][y][bit] = max(d, r);
     }
     else
     {
@@ -93,7 +104,7 @@ int f(int x, int y, bool coming, vvi &a, vvvi &t)
             l = temp2 + f(x, y - 1, coming, a, t);
             a[x][y - 1] = temp2;
         }
-        return t[x][y][coming] = max(u, l);
+        return t[x][y][bit] = max(u, l);
     }
 }
 

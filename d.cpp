@@ -20,7 +20,7 @@ ll f(ll k, ll s1, ll s2){
     while((k >= s2*cnt) && (((k - (s2 * cnt) )/s1) + cnt == (k / s1))){
         cnt++;
     }
-    if(cnt-1 < 0){
+    if(cnt == 0){
         return 0;
     }
     return cnt-1;

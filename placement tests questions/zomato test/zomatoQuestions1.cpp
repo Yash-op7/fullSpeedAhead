@@ -1,6 +1,9 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 #define all(x) x.begin(), x.end()
 
-string Solution::solve(string A) {
+string solve(string A) {
     int n = A.length();
     string ans = "";
     int l,r;
@@ -23,15 +26,21 @@ string Solution::solve(string A) {
             ans = "" + '0' + ans + '0';
         }else if(A[l] < A[r]){
             string temp= A.substr(0, l);
-            ans = temp + A[r] + ans + A[r] + reverse(all(temp));
+            string x =temp;
+            reverse(all(temp));
+            ans = x + A[r] + ans + A[r] + temp;
             return ans;
-        }else if(A[l] > A{r}){
+        }else if(A[l] > A[r]){
             string temp= A.substr(0, l+1);
-            ans  = temp + ans + reverse(all(temp));
+            string x = temp;
+            reverse(all(temp));
+            ans  = x + ans + temp;
             return ans;
         }else{
             string temp= A.substr(0, l);
-            ans = temp+ (char)((int)A[l] + 1) + ans +(char)((int)A[l] + 1)+ reverse(all(temp));
+            string x = temp;
+            reverse(all(temp));
+            ans = x+ (char)((int)A[l] + 1) + ans +(char)((int)A[l] + 1)+ temp;
             return ans;
         }
         

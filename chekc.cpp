@@ -43,7 +43,7 @@ int f(int x, string &board, string &hand)
     string temp = board;
     int ans = INT_MAX;
     for (int i = 0; i < board.size() + 1; i++)
-    {
+    {   
         // board.insert(i, 1, hand[x]);
         board = board.substr(0, i) + hand[x] + board.substr(i);
         string gh = board;

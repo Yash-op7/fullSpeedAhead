@@ -75,12 +75,15 @@ int canReachEnd2(int idx, set<int> &h1, vi &a, unordered_map<int, vi> &locs)
     while (flag)
     {
         auto it = h1.lower_bound(a[idx]);
-        if (it == h1.end())
+        if (*it != a[idx] && it == h1.begin())
         {
             flag = false;
             break;
         }
         int val = *it;
+        if(val != a[idx]){
+            
+        }
         vi temp = locs[val];
         while (true)
         {

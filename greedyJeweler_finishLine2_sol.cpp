@@ -1,101 +1,70 @@
-bool isValid(int x1, int y1, int x2, int y2, int n) {
+/*
+    Time Complexity : O(N^3)
+    Space Complexity : O(N^2)
 
-    if (n == x1 || n == x2 || n == y1 || n == y2) {
+    Where, N is the size of the array.
+*/
+#include <bits/stdc++.h>
+using namespace std;
 
-        return false;
+int greedyJeweller(int n, vector<vector<int>> &mat)
+{
 
+    int m = (n - 1) * 2;
+    vector<vector<int>> dp(n, vector<int>(n, -1));
+
+    // Base case.
+    dp[0][0] = mat[0][0];
+    for (int i = 1; i <= m; i++)
+    {
+
+        // New dp array to store the values at current position.
+        vector<vector<int>> dpNew(n, vector<int>(n, -1));
+        for (int j = n - 1; j >= 0; j--)
+        {
+            for (int k = n - 1; k >= 0; k--)
+            {
+
+                // Check for valid path.
+                if (i - j < 0 || i - j >= n || i - k < 0 || i - k >= n || mat[j][i - j] == -1 || mat[k][i - k] == -1)
+                {
+                    continue;
+                }
+
+                dpNew[j][k] = dp[j][k];
+                if (j > 0)
+                {
+                    dpNew[j][k] = max(dpNew[j][k], dp[j - 1][k]);
+                }
+
+                if (k > 0)
+                {
+                    dpNew[j][k] = max(dpNew[j][k], dp[j][k - 1]);
+                }
+
+                if (j > 0 && k > 0)
+                {
+                    dpNew[j][k] = max(dpNew[j][k], dp[j - 1][k - 1]);
+                }
+
+                if (dpNew[j][k] < 0)
+                {
+                    continue;
+                }
+
+                // Check if gold is present at current position for first path.
+                dpNew[j][k] += mat[j][i - j];
+
+                // Check if gold is present at current position for second path.
+                if (j != k)
+                {
+                    dpNew[j][k] += mat[k][i - k];
+                }
+            }
+        }
+
+        // Update dp array.
+        dp = dpNew;
     }
-
-    return true;
-
-}
-
- 
-
-int greedyJewellerHelper(int x1, int y1, int x2, int n, vector<vector<int>> &mat, vector<vector<vector<int>>> &dp) {
-
- 
-
-    // Find the y coordinate of the second path.
-
-    int y2 = x1 + y1 - x2;
-
- 
-
-    if (!isValid(x1, y1, x2, y2, n)) {
-
-        return -99999;
-
-    }
-
- 
-
-    int &ans = dp[x1][y1][x2];
-
- 
-
-    // Check if the current positions are already visited.
-
-    if (ans != -99999) {
-
-        return ans;
-
-    }
-
- 
-
-    // Base Case.
-
-    if (mat[x1][y1] == -1 || mat[x2][y2] == -1) {
-
-        return -99999;
-
-    }
-
- 
-
-    if (x1 == n - 1 and y1 == n - 1) {
-
-        return mat[x1][y1];
-
-    }
-
- 
-
-    // Check if gold is present at current position for first path.
-
-    ans = mat[x1][y1];
-
- 
-
-    // Check if gold is present at current position for second path.
-
-    if (y1 != y2) {
-
-        ans += mat[x2][y2];
-
-    }
-
- 
-
-    // Recursion call.
-
-    ans += max({greedyJewellerHelper(x1, y1 + 1, x2 + 1, n, mat, dp), greedyJewellerHelper(x1 + 1, y1, x2 + 1, n, mat, dp), greedyJewellerHelper(x1, y1 + 1, x2, n, mat, dp), greedyJewellerHelper(x1 + 1, y1, x2, n, mat, dp)});
-
-    return ans;
-
-}
-
- 
-
-int greedyJeweller(int n, vector<vector<int>> &mat) {
-
- 
-
-    // Function call.
-
-    vector<vector<vector<int>>> dp(n, vector<vector<int>>(n, vector<int>(n, -99999)));
-
-    return max(0, greedyJewellerHelper(0, 0, 0, n, mat, dp));
-
+    return max(0, dp[n - 1][n - 1]);
 }

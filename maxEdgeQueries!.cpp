@@ -38,10 +38,8 @@ bool f(int src, int dest, vvi adj[], int parent, int &ans, map<vi, int> &t)
             if (f(x[0], dest, adj, src, ans, t))
             {
                 ans = max(ans, x[1]);
-                if (ans <= x[1])
-                {
-                    t[{src, dest}] = x[1];
-                }
+                t[{src, dest}] = ans;
+
                 unvisNeighbours++;
             }
         }
@@ -64,13 +62,12 @@ vector<int> Solution::solve(vector<vector<int>> &A, vector<vector<int>> &B)
     }
     vi ans(B.size(), 0);
     int q = B.size();
-    int ans1 = INT_MIN;
     map<vi, int> t;
     for (int i = 0; i < q; i++)
     {
+        int ans1 = INT_MIN;
         bool k = f(B[i][0], B[i][1], adj, -1, ans1, t);
         ans[i] = ans1;
-        ans1 = INT_MIN;
     }
     return ans;
 }

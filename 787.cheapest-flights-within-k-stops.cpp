@@ -1,10 +1,3 @@
-/*
- * @lc app=leetcode id=787 lang=cpp
- *
- * [787] Cheapest Flights Within K Stops
- */
-
-// @lc code=start
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -26,37 +19,60 @@ const int MOD = 1e9 + 7;
 class Solution
 {
 public:
-    int findCheapestPrice(int n, vector<vector<int>> &flights,
-                          int src, int dst, int k)
+    int findCheapestPrice(int n, vector<vector<int>> &flights, int src, int dst, int k)
     {
-        vvi adj[n];
-        for (const auto x : flights){
+        vector<vector<int>> adj[n];
+        for (const auto x : flights)
+        {
             adj[x[0]].push_back({x[1], x[2]});
         }
-        pq<vi, vvi, greater<vi>>q;
-        vi dist(n, 1e9);
-        dist[src] = 0;
-        q.push({0, dist[src], src});
-
-        while(!q.empty()){
-            vi top = q.top();
+        queue<vector<int>> q;
+        q.push({src, 0});
+        q.push({});
+        int radius = 0;
+        int ans = INT_MAX;
+        vector<int> dist(n, 1e9);
+        while (!q.empty())
+        {
+            vector<int> front = q.front();
             q.pop();
-            int curr = top[2];
-            if(curr =dst){
-                return dist[dst];
+            if (front.empty())
+            {
+                if (q.empty())
+                {
+                    break;
+                }
+                else
+                {
+                    q.push({});
+                    if (radius == k + 1)
+                    {
+                        break;
+                    }
+                    radius += 1;
+                    continue;
+                }
             }
-            if(top[0] == k){
-                return -1;
+            int currNode = front[0];
+            int currDist = front[1];
+            if (currNode == dst)
+            {
+                ans = min(currDist, ans);
+                continue;
             }
-            int currk = top[0];
-            for(const auto next:adj[curr]){
-                if(dist[next[0]] > dist[curr] + next[1]){
-                    dist[next[0]] = dist[curr] + next[1];
-                    q.push({top[0] + 1, dist[next[0]], next[0]});
+            for (const auto x : adj[currNode])
+            {
+                if (dist[x[0]] > currDist + dist[currNode])
+                {
+                    dist[x[0]] = currDist + dist[currNode];
+                    q.push({x[0], currDist + x[1]});
                 }
             }
         }
-        return -1;
+        if (ans == INT_MAX)
+        {
+            return -1;
+        }
+        return ans;
     }
 };
-// @lc code=end

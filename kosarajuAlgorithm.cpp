@@ -50,7 +50,7 @@ class Solution
         dfs(0, adj, vis, finishingTimes);
         vis = vb(V, false);
         reverse(finishingTimes.begin(), finishingTimes.end());
-        vvi adjRev(V);
+        vvi adjRev(V);  
         for(int i=0;i<V;i++){
             for(const int &x:adj[i]){
                 adjRev[x].push_back(i);

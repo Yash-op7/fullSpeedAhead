@@ -1,82 +1,125 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define vi vector<int>
-#define vvi vector<vi>
-#define vb vector<bool>
-#define vvb vector<vb>
-#define pq priority_queue
-#define ll long long
-#define all(x) (x).begin(), (x).end()
-#define vl vector<ll>
-#define vvl vector<vl>
-#define rep(i, a, b) for (int i = a; i < b; i++)
-const ll INF = 1e12;
-const int MOD = 1e9 + 7;
+string alienOrder(vector<string> &A, int n)
 
-string alienOrder(vector<string> &arr, int n)
-{	
-	// Write your code here	
-	unordered_map<char, string> order;
-	vector<int> indegree(26, -1);
-	for(int i=1;i<arr.size();i++){
-		string one = arr[i-1];
-		string two = arr[i];
-		for(int j=0;j<min(one.length(), two.length());j++){
-			if(one[j] != two[j]){
-				if(indegree[one[j] - 'a'] == -1){
-					indegree[one[j]-'a'] = 0;
-				}
-                if(indegree[two[j] - 'a'] == -1){
-                    indegree[two[j] -'a'] = 0;
-                }
-				order[two[j]] += one[j];
-				indegree[one[j] - 'a']++;
-				break;
-			}
-		}
-	}
-    for(int i=0;i<n;i++){
-        char c1 = i + 'a';
-        sort(all(order[c1]));
-    }
-	string ans = "";
-	queue<char> q;
-	for(int i=0;i<26;i++){
-		if(indegree[i] == 0){
-			q.push((char)(i + 'a'));
-		}
-	}
-	while(!q.empty()){
-		char front = q.front();
-		q.pop();
-		ans += front;
-		for(int i=0;i<order[front].length();i++){
-			char curr = order[front][i];
-			indegree[curr - 'a']--;
-			if(indegree[curr-'a'] == 0){
-				q.push(curr);
-			}
-		}
-	}
-	reverse(all(ans));
-	return ans;
+{
 
-}
+    vector<int> graph[26];
 
-int main(){
-    int tt;
-    cin>>tt;
-    while(tt--){
+    vector<int> deg(26, 0);
 
-        int n;
-        cin >> n;
-        vector<string> a(n);
-        for (int i = 0; i < n; i++)
+    vector<bool> vis(26, 0);
+
+    for (auto it : A)
+
+    {
+
+        for (auto jt : it)
+
         {
-            cin >> a[i];
+
+            vis[jt - 'a'] = 1;
         }
-        cout << alienOrder(a, n) << endl;
     }
 
+    for (int i = 0; i < n - 1; i++)
+
+    {
+
+        string a = A[i], b = A[i + 1];
+
+        int p = a.size(), q = b.size();
+
+        for (int j = 0; j < min(p, q); j++)
+
+        {
+
+            if (a[j] != b[j])
+
+            {
+
+                graph[a[j] - 'a'].push_back(b[j] - 'a');
+
+                deg[b[j] - 'a']++;
+
+                break;
+            }
+        }
+    }
+
+    vector<int> res;
+
+    priority_queue<int, vector<int>, greater<int>> pq;
+
+    int cnt = 0;
+
+    for (int i = 0; i < 26; i++)
+
+    {
+
+        if (vis[i] && deg[i] == 0)
+
+        {
+
+            pq.push(i);
+        }
+
+        if (vis[i])
+
+        {
+
+            cnt++;
+        }
+    }
+
+    while (pq.size() != 0)
+
+    {
+
+        int node = pq.top();
+
+        pq.pop();
+
+        res.push_back(node);
+
+        for (auto child : graph[node])
+
+        {
+
+            deg[child]--;
+
+            if (deg[child] < 0)
+
+            {
+
+                return "";
+            }
+
+            if (deg[child] == 0)
+
+            {
+
+                pq.push(child);
+            }
+        }
+    }
+
+    if (res.size() != cnt)
+
+    {
+
+        return "";
+    }
+
+    string ans = "";
+
+    for (auto it : res)
+
+    {
+
+        ans += it + 'a';
+    }
+
+    return ans;
 }
