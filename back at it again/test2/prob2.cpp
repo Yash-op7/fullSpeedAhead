@@ -1,82 +1,32 @@
-
 #include <bits/stdc++.h>
 
-int modifiedLudo(vector<vector<int>> &connections, int n)
+int modifiedLudo(vector<vector<int>> &edges, int n)
 {
-    // Write your code here
+    vector<vector<pair<int, int>>> adj(n + 1);
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= 6 && (i + j <= n); j++)
+        {
+            adj[i].push_back({i + j, 1}); // adj[i+j].push_back({i,1});        }    }    for(auto &x:edges)    {        int a=x[0],b=x[1];        adj[a].push_back({b,0});        // adj[b].push_back({a,0});    }
 
-    vector<vector<int>> adj(n + 1);
-    for (const auto x : connections)
-    {
-        adj[x[0]].push_back(x[1]);
-    }
-    queue<int> q;
-    vector<bool> vis(n + 1, false);
-
-    q.push(1);
-    vis[1] = true;
-    if (!adj[1].empty())
-    {
-        for (const int x : adj[1])
-        {
-            q.push(x);
-            if (x == n)
+            vector<int> dist(n + 1, INT_MAX);
+            dist[1] = 0;
+            priority_queue<pair<int, int>> pq;
+            pq.push({0, 1});
+            while (!pq.empty())
             {
-                return 0;
-            }
-            vis[x] = true;
-        }
-    }
-    int moves = 0;
-    q.push(-1);
-    while (!q.empty())
-    {
-        int curr = q.front();
-        q.pop();
-        if (curr == -1)
-        {
-            if (q.empty())
-            {
-                break;
-            }
-            else
-            {
-                q.push(-1);
-                moves++;
-            }
-        }
-        else
-        {
-            if (curr == n)
-            {
-                return moves;
-            }
-            if (!adj[curr].empty())
-            {
-                for (auto x : adj[curr])
+                pair<int, int> temp = pq.top();
+                pq.pop();
+                int a = -1 * temp.first, b = temp.second;
+                for (auto &x : adj[b])
                 {
-                    if (!vis[x])
+                    if (dist[b] + x.second < dist[x.first])
                     {
-                        if(x == n){
-                            return moves;
-                        }
-                        vis[x] = true;
-                        q.push(x);
+                        dist[x.first] = dist[b] + x.second;
+                        pq.push({-1 * dist[x.first], x.first});
                     }
                 }
             }
-            for (int i = 1; i <= 6; i++)
-            {
-                if (!vis[curr + i])
-                {
-                    if(curr+i == n){
-                        return moves;
-                    }
-                    vis[curr + i] = true;
-                    q.push(curr + i);
-                }
-            }
+
+            return dist[n];
         }
-    }
-    return moves;
-}
