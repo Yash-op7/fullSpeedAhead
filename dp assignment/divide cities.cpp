@@ -10,8 +10,24 @@ string ltrim(const string &);
 string rtrim(const string &);
 vector<string> split(const string &);
 
+vi color(1e5, -1);
+
 int f(int curr, int src, int parent, int cnt, vvi &adj){
-    
+    color[src] = curr;
+    int ans = 1;
+    if(parent == -1){
+        for(int x:adj[src]){
+            color[x] = curr;
+            int temp = f(curr, x, src, 2, adj) + f(1-curr, x, src, 2, adj);
+            for(int y:adj[src]){
+                ans += temp*f(1, y, src, 1, adj);
+            }
+        }
+    }else{
+        if(cnt == 1){
+
+        }
+    }
 }
 
 int kingdomDivision(int n, vector<vector<int>> roads) {

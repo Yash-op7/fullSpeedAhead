@@ -1,8 +1,4 @@
-https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description
-
-https://www.codingninjas.com/studio/problems/k-palindrome_2434296
-
-https://www.codingninjas.com/studio/problems/count-palindromic-subsequences_1062696
+https://www.codingninjas.com/studio/problems/container-with-most-water_873860
 
 
-
+https://www.codingninjas.com/studio/problems/zig-zag-subsequence_1473863

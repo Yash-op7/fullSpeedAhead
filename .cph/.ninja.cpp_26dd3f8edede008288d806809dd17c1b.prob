@@ -1,0 +1,1 @@
+{"name":"Local: ninja","url":"d:\\fullSpeedAhead\\ninja.cpp","tests":[{"id":1697317429940,"input":"5\nacaff\n1\nccddbcdbda\n2\nbbecbacfaf\n9\nfdeccbed\n1\naddbee\n2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\fullSpeedAhead\\ninja.cpp","group":"local","local":true}
