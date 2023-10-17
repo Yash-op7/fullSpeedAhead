@@ -1,7 +1,6 @@
-https://www.codingninjas.com/studio/problems/container-with-most-water_873860
+Google questions:
 
+medium: 
 
-https://www.codingninjas.com/studio/problems/zig-zag-subsequence_1473863
-
-
-https://leetcode.com/problems/word-break-ii/description/
+https://leetcode.com/problems/3sum/description/
+https://leetcode.com/problems/3sum-closest/description/
