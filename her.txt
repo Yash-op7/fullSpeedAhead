@@ -1,6 +1,0 @@
-Google questions:
-
-medium: 
-
-https://leetcode.com/problems/3sum/description/
-https://leetcode.com/problems/3sum-closest/description/

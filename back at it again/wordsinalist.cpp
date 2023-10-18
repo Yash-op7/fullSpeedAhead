@@ -4,7 +4,7 @@ bool check(int idx, string &s, unordered_map<string, bool>&dict){
         return true;
     }
     string str = "";
-    for(int i=idx;i<s.length();i++){f
+    for(int i=idx;i<s.length();i++){
         str += s[i];
         if(dict[str]){
             if(check(i+1, s, dict)){
