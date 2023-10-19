@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int lowestPrice(vector<vector<string>> &products, vector<vector<string>> &discounts){
+    unordered_map<string, pair<int, int>> dis;
+    int d = discounts.size();
+    for(int i=0; i<d; i++){
+        string type = discounts[i][0];
+        int idx = stoi(discounts[i][1]);
+        int price = stoi(discounts[i][2]);
+        dis[type]= {idx, price};
+    }
+    int ans = 0;
+    int n = products.size();
+    int m = products[0].size();
+    for(int i=0; i<n; i++){
+        int cal = INT_MAX;
+        int price = stoi(products[i][0]);
+        for(int j=1; j<m; j++){
+            string type = products[i][j];
+            if(type == "empty"){
+                cal = min(price, cal);
+                break;
+            }
+            int disType = dis[type].first;
+            int disPrice = dis[type].second;
+            if(disType == 0){
+                cal = min(cal, disPrice);
+            }
+            else if(disType == 1){
+                int temp = price - ((price*disPrice)/100);
+                cal = min(cal, temp);
+            }
+            else {
+                cal = min(cal, price-disPrice);
+            }
+        }
+        ans += cal;
+    }
+    return ans;
+}
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n,m,d;
+    cin>>n>>m;
+    vector<vector<string>> products(n, vector<string>(m));
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            cin>>products[i][j];
+        }
+    }
+    cin>>d;
+    vector<vector<string>> discounts(d, vector<string>(3));
+    for(int i=0; i<d; i++){
+        for(int j=0; j<3; j++){
+            cin>>discounts[i][j];
+        }
+    }
+    cout<<lowestPrice(products, discounts);
+    return 0;
+}
