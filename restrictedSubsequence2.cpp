@@ -2,14 +2,12 @@
 using namespace std;
 
 #define vi vector<int>
-
-
 #define vvi vector<vi>
 
 int f(int idx, int timeReq, vi &cost, vi &time, vector<vvi> &t){
     cout<<idx<<' '<<timeReq<<'\n';
-    if(timeReq >= cost.size()-idx){
-        cout<<timeReq<<' '<<(cost.size()-idx)<<" breaking\n";
+    if(timeReq > cost.size()-idx){
+        cout<<timeReq<<" > "<<(cost.size()-idx)<<" breaking\n";
         return 0;
     }
     if(idx == cost.size()){
@@ -43,6 +41,12 @@ int paintWalls(vector<int> &cost, vector<int> &time)
 int main(){
     vi cost = {1, 2, 3,2};
     vi time = {1, 2, 3,2};
-    cout<<paintWalls(cost, time)<<endl;
+    // cout<<paintWalls(cost, time)<<endl;
 
+    int timeReq = -1, idx = 1;
+    // cout<<cost.size()<<" is cost.size()\n";
+    int n = cost.size();
+    if(timeReq > (cost.size())){
+        cout<<"wtf";
+    }
 }
