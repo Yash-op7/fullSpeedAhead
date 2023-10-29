@@ -1,0 +1,5 @@
+There are N empty houses on a straight line, numbered from 1 to N. You are given an array of N integers called houses and an integer K. On the i-th day where 1 ≤ i ≤ N, a person moves into the house numbered house[i], you have to find the minimum number of days when the neighbourhood becomes a happy neighbourhood. A happy neighbourhood is a neighbourhood where at least K consecutive houses are occupied.
+
+1 ≤ N ≤ 1e5
+1 ≤ K ≤ N
+1 ≤ house[i] ≤ N
