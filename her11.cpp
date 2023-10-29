@@ -32,7 +32,7 @@ int solve(vector<int> &a)
                 while (l <= loc_min)
                 {
                     minHeap.erase({a[l], l});
-                    maxHeap.erase({a[l], l});
+                    maxHeap.erase({a[l], l} );
                     l++;
                     ans++;
                 }
