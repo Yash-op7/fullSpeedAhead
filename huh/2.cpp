@@ -20,7 +20,7 @@ int deleteEdge(vector<int> &A, vector<vector<int>> &B)
 
     const int mod = 1e9 + 7;
     int n = A.size();
-    vector<vector<int>> graph(n + 1);
+    vector<vector<int>> graph(1e5 + 1);
     for (int i = 0; i < B.size(); i++)
     {
         int u = B[i][0];
@@ -36,7 +36,7 @@ int deleteEdge(vector<int> &A, vector<vector<int>> &B)
     for (int i = 0; i < n; i++)
         s = s + A[i];
 
-    for (int i = 2; i <= n; i++)
+    for (int i = 0; i <= n; i++)
     {
         long long part1 = sum[i];
         long long part2 = s - part1;
