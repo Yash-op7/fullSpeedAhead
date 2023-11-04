@@ -1,0 +1,116 @@
+#include iostream
+#include limits
+using namespace std;
+
+ To execute C++, please define int main()
+int main() {
+  auto words = { Hello, , World!, n };
+  for (const char const& word  words) {
+    cout  word;
+  }
+  return 0;
+}
+
+class LinkedList {
+ public
+  int value;
+  LinkedList next;
+
+  LinkedList(int value) {
+    this-value = value;
+    next = nullptr;
+  }
+};
+
+LinkedList shiftLinkedList(LinkedList head, int k) {
+   Write your code here.
+  return nullptr;
+}
+
+head = 0-1-2-3-4-5
+k=2
+ output  4-5-0-1-2-3
+
+ k=-1
+ output  1-2-3-4-5-0
+ k (+ve,-ve,0)
+
+ return invalid (if kn=no. of nodes)
+
+LinkedList shift(LinkedList head, int k){
+  LinkedList p = head;
+  int n = 0;
+  if(head == nullptr){
+    return head;
+  }
+  if(k = n){
+    coutinvalidn;
+    return nullptr;
+  }
+  while(p != nullptr){
+    n++;
+    p = p-next;
+  }
+  int val = n - k;
+  p = head;
+  if(val = n){
+     k is negative
+    LinkedList temp = head;
+    int cnt = 0;
+    LinkedList prev=temp;
+    while(temp != nullptr && cnt != k){
+      cnt++;
+      temp = prev;
+      temp=temp-next;
+    }
+    prev-next = nullptr;
+    LinkedList newHead = temp;
+    while(temp-next != nullptr){
+      temp = temp-next;
+    }
+    temp-next = head;
+    return newHead;
+  }else{
+    LinkedList temp = head;
+    LinkedList prev = temp;
+    int cnt= 0;
+    
+    while(temp - next != nullptr && cnt != n-k){
+      cnt++;
+      prev = temp;
+      temp = temp-next;
+    }
+    LinkedList newHead = temp;
+    prev - next = nullptr;
+    while(temp-next != nullptr){
+      temp = temp-next;
+    }
+    temp-next = head;
+    return newHead;
+  }
+}
+
+httpswww.algoexpert.ioquestionsshift-linked-list
+
+name. salary
+Aman 3000
+rohit 3500
+ashish 2000
+
+employee -table name
+
+2nd highest salary
+
+
+SELECT salary
+FROM employee
+1. limit 
+2. diff. bw employee 
+
+class Animal{
+
+}
+
+class Dog extends Animals{
+  
+}
